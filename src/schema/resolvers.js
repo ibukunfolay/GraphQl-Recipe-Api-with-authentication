@@ -70,9 +70,13 @@ export const resolvers = {
         password: hashedPassword,
       });
 
-      const token = jwt.sign({ user_id: newUser._id, email }, 'SAFE_KEY', {
-        expiresIn: '10m',
-      });
+      const token = jwt.sign(
+        { user_id: newUser._id, email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '10m',
+        },
+      );
 
       newUser.token = token;
 
@@ -89,9 +93,13 @@ export const resolvers = {
       }
 
       if (user && (await bcrypt.compareSync(password, user.password))) {
-        const token = jwt.sign({ user_id: user._id, email }, 'SAFE_KEY', {
-          expiresIn: '10m',
-        });
+        const token = jwt.sign(
+          { user_id: user._id, email },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: '10m',
+          },
+        );
 
         user.token = token;
 

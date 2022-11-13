@@ -2,12 +2,14 @@
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 /* Importing the typeDefs and resolvers from the index.js file in the schema folder. */
 import { typeDefs, resolvers } from './src/schema/index';
 
 // initialize express
 const app = express();
+dotenv.config();
 const host = process.env.HOST || 'http://localhost';
 const port = process.env.PORT || 4888;
 const Mongo_URI = process.env.URI || 'mongodb://localhost:27017/graphgqltest';
